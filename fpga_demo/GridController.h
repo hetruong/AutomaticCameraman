@@ -11,8 +11,7 @@ class FramePool;
 struct GridSquare
 {
 public:
-    GridSquare(int x0, int y0, int w, int h, int nframes);
-    void update_index(void);
+    GridSquare(int x0, int y0, int w, int h);
 
     int _x0;   // location of upper right corner
     int _y0;   // location of upper left corner
@@ -41,9 +40,15 @@ public:
 	               int img_w, int img_h, FramePool *videoPool);
 	~GridController();
 	void start();
+	void stop();
+
 
     FramePool *videoPool; // the video pool for tracking
 	std::vector<GridSquare> _squares; // grid of squares
+
+	int _img_w;    // width of image in pixels
+	int _img_h;    // height of image in pixels
+	bool _end;
 
 
 protected:
@@ -52,8 +57,6 @@ protected:
 	int _x_step;   // number of pixels between left edge of each square
 	int _y_step;   // number of pixels between top edge of each square
 	int _dim;      // height and width of a single box
-    int _img_w;    // width of image in pixels
-    int _img_h;    // height of image in pixels
 	pthread_t _thread;    // Thread for tracking
 
 };

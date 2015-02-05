@@ -137,7 +137,6 @@ main
                                                           12,
                                                           video->_width,
                                                           video->_height,
-                                                          50,
                                                           videoPool);
 
     //debug_logger->log("Creating new grid controller");
@@ -214,15 +213,7 @@ runtime_logic
                            roi);
 
     //-----------------------------------------------------------------
-    // Create controller and annotator
-    GridController * grid_controller = new GridController(36,
-                                                          36,
-                                                          20,
-                                                          20,
-                                                          16,
-                                                          video->_width,
-                                                          video->_height,
-														  videoPool);
+    // Create controller
     GridAnnotator * grid_annotator = new GridAnnotator(0, grid_controller);
     annotator->add(grid_annotator);
 
