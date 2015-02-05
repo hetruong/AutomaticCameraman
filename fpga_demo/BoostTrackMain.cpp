@@ -214,16 +214,22 @@ runtime_logic
                            roi);
 
     //-----------------------------------------------------------------
-    // Release the frame
-    videoPool->release(frame);
-
-    //-----------------------------------------------------------------
-    // Create annotator
+    // Create controller and annotator
+    GridController * grid_controller = new GridController(36,
+                                                          36,
+                                                          20,
+                                                          20,
+                                                          16,
+                                                          video->_width,
+                                                          video->_height,
+														  videoPool);
     GridAnnotator * grid_annotator = new GridAnnotator(0, grid_controller);
     annotator->add(grid_annotator);
 
     //-----------------------------------------------------------------
-    // Start various threads
+    // Release the frame
+    videoPool->release(frame);
+    grid_controller->start();
     annotator->start();     // DELAY STARTING THESE THINGS UNTIL NOW TO
     grid_controller->start();
 
